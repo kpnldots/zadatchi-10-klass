@@ -1,0 +1,1 @@
+# zadatchi-10-klass
