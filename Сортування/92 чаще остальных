@@ -1,0 +1,32 @@
+const Nmax=96; 
+type Tmas=array[0..Nmax-1] of longint;
+
+procedure input(var mas : Tmas ; var N : longint);
+var i : longint;
+	symbol : char;
+begin
+	read(N);
+	for i := 0 to N-1 do
+		begin
+			read(symbol);
+			inc(mas[integer(symbol)-32]);
+		end;
+end;
+
+function max_index_mas(mas : Tmas ; N : longint) : longint;
+var i , index : longint;
+begin
+	index := 0;
+	for i := 1 to Nmax-1 do
+		if (mas[i] > mas[index])
+		then index := i;
+	max_index_mas := index;
+end;
+
+var mas : Tmas;
+	N : longint;
+
+begin
+	input(mas , N);
+	write(max_index_mas(mas , N) + 32);
+end.

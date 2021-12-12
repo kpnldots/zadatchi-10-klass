@@ -1,0 +1,55 @@
+const Nmax=1000; 
+type Tmas=array[1..Nmax] of longint;
+
+procedure swap(var a,b:longint);
+var c:longint;
+begin
+  c:=a;
+  a:=b;
+  b:=c;
+end;
+
+procedure input_mas(var mas:Tmas; var N:longint);
+var i:longint;
+begin
+    read(N);
+    for i:=1 to N do read(mas[i]);
+end;
+
+procedure output_mas(var mas:Tmas ; var N:longint);
+var i:longint;
+begin
+    for i:=1 to N do write(mas[i],' ');
+end;
+
+procedure insert_sort(mas : Tmas;N : longint);
+var etalon,i,j,cnt:longint;
+begin
+    cnt := 0;
+    for j := 2 to N do
+    begin
+        etalon:= mas[j];
+        i:= j-1;
+        while ((mas[i] > etalon) and (i > 0)) do
+        begin
+            mas[i+1]:=mas[i];
+            i-=1;
+        end;
+        mas[i+1]:=etalon;
+        if (i <> j-1)
+        then
+          begin
+            cnt += 1;
+            output_mas(mas , N); writeln;
+          end;
+    end;
+    if (cnt=0)
+    then write('The array is already sorted');
+end;
+
+var mas:Tmas; n:longint;
+
+begin
+    input_mas(mas , N);
+    insert_sort(mas , N);
+end.

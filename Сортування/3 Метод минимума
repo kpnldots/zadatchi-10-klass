@@ -1,0 +1,42 @@
+const Nmax=1000; 
+type Tmas=array[1..Nmax] of longint; 
+
+function min_mas(var mas:tmas;start,N:longint):longint;
+var i,m:longint;
+begin
+  m:=start;
+  for i:=start to N do
+    if mas[i]<mas[m] then m:=i;
+  min_mas:=m;
+end;
+
+procedure swap(var a,b:longint);
+var c:longint;
+begin
+  c:=a;
+  a:=b;
+  b:=c
+end;
+
+procedure input_mas(var mas:tmas; var N:longint);
+var i:longint;
+begin 
+  read(N);
+  for i:=1 to N do read(mas[i]);
+end;
+
+var mas:Tmas; num,answer,N,i:longint;
+
+begin
+  input_mas(mas,N);
+  num:=mas[1];
+  answer:=0;
+  for i:=1 to N do
+    if i<min_mas(mas,i,N) then 
+    begin 
+      if ((mas[i]=num) or (mas[min_mas(mas,i,N)]=num)) then inc(answer);
+      swap(mas[i],mas[min_mas(mas,i,N)]);
+    end;
+  Write(answer);
+end.
+    

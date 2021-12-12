@@ -1,0 +1,57 @@
+const Nmax=1000; 
+type Tmas=array[1..Nmax] of longint; 
+
+function max_mas(var mas:tmas;start,N:longint):longint;
+var i,m:longint;
+begin
+  m:=start;
+  for i:=start to N do
+    if mas[i]>mas[m] then m:=i;
+  max_mas:=m;
+end;
+
+procedure delete(var mas:Tmas; n,b:longint);
+var i:word; 
+begin
+  for i:=b to N-1 do mas[i]:=mas[i+1];
+  for i:=N to N+10 do mas[i]:=10000;
+end;
+
+procedure swap(var a,b:longint);
+var c:longint;
+begin
+  c:=a;
+  a:=b;
+  b:=c
+end;
+
+procedure input_mas(var mas:tmas; var N:longint);
+var i:longint;
+begin 
+  read(N);
+  for i:=1 to N do read(mas[i]);
+end;
+
+procedure sortirovka_mas(var mas:Tmas; N:longint);
+var i,j:longint;
+begin
+  for i:=1 to N do
+    if i<max_mas(mas,i,N) then swap(mas[i],mas[max_mas(mas,i,N)]);
+  for i:=1 to N do
+    for j:=1 to N-1 do
+      if mas[j]=mas[j+1] then delete(mas,n,j+1);
+end;
+    
+var mas,mas1:Tmas; N,j,i:longint;
+
+begin
+  input_mas(mas,N);
+  mas1:=mas;
+  sortirovka_mas(mas,N);
+  for i:=1 to N do 
+    for j:=1 to N do
+      if mas1[j]=mas[i] then write(j,' ');
+end.
+  
+
+    

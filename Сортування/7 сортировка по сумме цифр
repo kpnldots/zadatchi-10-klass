@@ -1,0 +1,66 @@
+const Nmax=100; 
+type Tmas=array[1..Nmax] of longint;
+
+procedure swap(var a,b:longint);
+var c:longint;
+begin
+  c:=a;
+  a:=b;
+  b:=c;
+end;
+
+procedure input_mas(var mas:Tmas; var N:longint);
+var i:longint;
+begin
+    read(N);
+    for i:=1 to N do read(mas[i]);
+end;
+
+procedure output_mas(var mas:Tmas; var N:longint);
+var i:longint;
+begin
+    for i := 1 to N do write(mas[i],' ');
+end;
+
+function dig_sum(N : longint) : longint;
+var sum_b : longint;
+begin
+    sum_b:= 0;
+    N:= abs(N);
+    while (N > 0) do
+    begin
+        sum_b += N mod 10;
+        N:=N div 10;
+    end;
+    dig_sum := sum_b;
+end;
+
+function comp(a,b :longint):boolean;
+begin
+    if (dig_sum(a) > dig_sum(b))
+    then comp := true
+    else
+        if ((dig_sum(a) = dig_sum(b)) and (a > b))
+        then
+            comp := true
+        else
+            comp := false;
+end;
+
+procedure bubble_sort(var mas:Tmas; N:longint);
+var i,j:longint;
+begin
+    for i := 1 to N-1 do
+        for j := 1 to N-i do
+            if (comp(mas[j] , mas[j+1]))
+            then
+                swap(mas[j] , mas[j+1]);
+end;
+
+var mas:Tmas; N:longint;
+
+begin
+    input_mas(mas,N);
+    bubble_sort(mas,N);
+    output_mas(mas,N);
+end.

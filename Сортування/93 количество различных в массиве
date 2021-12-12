@@ -1,0 +1,30 @@
+const Nmax = 20001; 
+type Tmas=array[0..Nmax-1] of integer;
+
+procedure input(var mas : Tmas ; var N : integer);
+var i , element: integer;
+begin
+	read(N);
+	for i := 0 to N-1 do 
+	begin
+	    read(element);
+	    mas[element+10000] := 1;
+	end;
+end;
+
+function cnt_dif(mas : Tmas ; N : integer) : integer;
+var i , cnt : integer;
+begin
+    cnt := 0;
+    for i := 0 to Nmax-1 do
+        if (mas[i] = 1) then inc(cnt);
+    cnt_dif := cnt;
+end;
+
+var mas : Tmas;
+	N : integer;
+
+begin
+	input(mas , N);
+	write(cnt_dif(mas , N));
+end.

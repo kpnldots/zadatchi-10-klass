@@ -1,0 +1,66 @@
+const Nmax = 100; 
+type Tmas = array[0..2] of integer;
+type Tmat = array[0..Nmax-1] of Tmas;
+
+procedure swap(var a , b : Tmas);
+var i : integer;
+    temp : Tmas;
+begin
+  temp := a;
+  a := b;
+  b := temp;
+end;
+
+procedure input(var mat : Tmat ; var N : integer);
+var i , j : integer;
+begin
+    read(N);
+    for i := 0 to N-1 do
+        for j := 0 to 2 do
+            read(mat[i][j]);
+end;
+
+procedure output(mat : Tmat ; N : integer);
+var i , j : integer;
+begin
+    for i := 0 to N-1 do
+    begin
+        for j := 0 to 2 do
+            write(mat[i][j] , ' ');
+        writeln;
+    end;
+end;
+
+function comp(a , b : Tmas) : boolean;
+var time_a , time_b : longint;
+begin
+    time_a := a[0]*3600 + a[1]*60 + a[2];
+    time_b := b[0]*3600 + b[1]*60 + b[2];
+    if (time_a > time_b)
+    then comp := true
+    else comp := false;
+end;
+
+procedure bubble_sort(var mat : Tmat; N : integer);
+var i , j : integer;
+begin
+    for i := 0 to N-2 do
+        for j := 0 to N-i-2 do
+            if (comp(mat[j] , mat[j+1]))
+            then  swap(mat[j] , mat[j+1]);
+end;
+
+var mat : Tmat;
+    N : integer;
+
+begin
+    input(mat , N);
+    bubble_sort(mat , N);
+    output(mat , N);
+end.
+
+4
+10 20 30
+7 30 0
+23 59 59
+13 30 30

@@ -1,0 +1,63 @@
+const Nmax=10000; 
+type Tmas=array[1..Nmax] of longint; 
+
+procedure swap(var a,b:longint);
+var c:longint;
+begin
+  c:=a;
+  a:=b;
+  b:=c
+end;
+
+procedure input_mas(var mas:tmas; var N:longint);
+var i:longint;
+begin 
+  read(N);
+  for i:=1 to N do read(mas[i]);
+end;
+
+function min_mas(var mas:tmas;start,N:longint):longint;
+var i,m:longint;
+begin
+  m:=start;
+  for i:=start to N do
+    if mas[i]<mas[m] then m:=i;
+  min_mas:=m;
+end;
+
+procedure sortirovka_mas(var mas:Tmas ; N:longint);
+var i:longint;
+begin
+  for i:=1 to N do if i<min_mas(mas,i,N) then swap(mas[i],mas[min_mas(mas,i,N)]);
+end;
+
+procedure input_mas2(var mas:Tmas; N:longint);
+var mas_minus,mas_plus:Tmas; i,j,cnt_plus,cnt_minus,cnt_zero:longint;
+begin
+  cnt_plus:=0;
+  cnt_minus:=0;
+  cnt_zero:=0;
+  for i:=1 to N do begin
+    if mas[i]<0 then begin
+      inc(cnt_minus);
+      mas_minus[cnt_minus]:=mas[i];
+    end
+    else if mas[i]>0 then begin
+      inc(cnt_plus);
+      mas_plus[cnt_plus]:=mas[i];
+    end
+    else inc(cnt_zero);
+  end;
+  sortirovka_mas(mas_plus,cnt_plus);
+  sortirovka_mas(mas_minus,cnt_minus);
+  for j:=1 to cnt_minus do Write(mas_minus[j],' ');
+  for j:=1 to cnt_zero do write('0 ');
+  for i:=cnt_plus downto 1 do Write(mas_plus[i],' ');
+end;
+
+var mas,mas1:Tmas; N:longint;
+
+begin
+  input_mas(mas,N);
+  input_mas2(mas,N);
+end.

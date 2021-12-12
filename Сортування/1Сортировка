@@ -1,0 +1,38 @@
+const Nmax=1000; 
+type Tmas=array[1..Nmax] of longint; 
+
+procedure swap(var a,b:longint);
+var c:longint;
+begin
+  c:=a;
+  a:=b;
+  b:=c
+end;
+
+procedure input_mas(var mas:tmas; var N:longint);
+var i:longint;
+begin 
+  read(N);
+  for i:=1 to N do read(mas[i]);
+end;
+
+procedure sotrirovka_mas(var mas:Tmas; N:longint);
+var i,j:longint;
+begin
+  for i:=1 to N do
+    for j:=1 to N-i do
+      if mas[j+1]<mas[j] then swap(mas[j],mas[j+1]);
+end;
+
+procedure output_mas(var mas:Tmas; N:longint);
+var i:longint;
+begin
+  for i:=1 to N do write(mas[i],' ');
+end;
+
+var mas:Tmas; N:longint;
+begin
+  input_mas(mas,N);
+  sotrirovka_mas(mas,N);
+  output_mas(mas,N);
+end.

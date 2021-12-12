@@ -1,0 +1,43 @@
+const Nmax=100000; 
+type Tmas=array[1..Nmax] of longint; 
+
+procedure input_mas(var mas : tmas ; var N : longint);
+var i : longint;
+begin 
+  Read(N);
+  for i:=1 to N do
+    read(mas[i]);
+end;
+
+function bin_seek(var mas : Tmas; key , e : longint) : boolean;
+var b , mid : longint;
+begin
+  b:=1;
+  if ((mas[b] > key) or (mas[e] < key)) then bin_seek:=false
+  else begin
+    While e - b > 1 do
+      begin
+        mid := (e + b) div 2 ;
+        if key > mas[mid] then b := mid
+          else e := mid ;
+        if ((key = mas[b]) or (key = mas[e]))
+          then bin_seek := true 
+          else bin_seek := false;
+      end;
+  end;
+end;
+
+procedure output_mas(var mas , mas2 : Tmas; N , m : longint);
+var i : longint;
+begin
+  for i := 1 to M do 
+    if bin_seek(mas , mas2[i] , N) then Writeln('YES') else Writeln('NO');
+end;
+
+var mas , mas2: tmas ; N , M: longint ; 
+
+begin
+  input_mas( mas , N );
+  input_mas( mas2 , M );
+  output_mas(mas , mas2 , N , M);
+end.

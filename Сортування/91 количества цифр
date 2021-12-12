@@ -1,0 +1,39 @@
+const Nmax=1000; 
+type Tmas=array[1..Nmax] of longint; 
+
+procedure input_mas(var mas:tmas; var N:longint);
+begin 
+  read(mas[1]);
+  N:=1;
+  while mas[N]<>0 do begin
+    inc(N);
+    read(mas[N]);
+  end;
+  dec(N);
+end;
+
+procedure input_mas2(var mas,mas2:tmas; N:longint);
+var i,j,cnt:word;
+begin
+  cnt:=0;
+  for i:=1 to 9 do begin
+    for j:=1 to N do if mas[j]=i then inc(cnt);
+    mas2[i]:=cnt;
+    cnt:=0
+  end;
+end;
+
+procedure output_mas(var mas:Tmas; N:longint);
+var i:longint;
+begin
+  N:=9;
+  for i:=1 to N do Write(mas[i],' ');
+end;
+
+var mas,mas2:tmas; N:longint ; 
+
+begin
+  input_mas(mas,N);
+  input_mas2(mas,mas2,N);
+  output_mas(mas2,N);
+end.
